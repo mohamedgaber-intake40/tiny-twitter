@@ -25,4 +25,14 @@ class UserRepository implements UserRepositoryInterface
         return User::create($data);
     }
 
+    /**
+     * @param $followerUser
+     * @param $followedUser
+     * @return mixed|void
+     */
+    public function followUser($followerUser, $followedUser)
+    {
+        $followerUser->follows()->attach($followedUser);
+    }
+
 }

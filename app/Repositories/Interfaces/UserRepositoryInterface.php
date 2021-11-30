@@ -15,4 +15,11 @@ interface UserRepositoryInterface
      * @return mixed
      */
     public function createUser($data);
+
+    /**
+     * @param $followerUser
+     * @param $followedUser
+     * @return mixed
+     */
+    public function followUser($followerUser, $followedUser);
 }

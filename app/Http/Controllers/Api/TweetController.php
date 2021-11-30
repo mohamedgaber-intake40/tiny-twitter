@@ -4,10 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TweetRequest;
-use App\Http\Resources\TweetResource;
-use App\Models\Tweet;
 use App\Services\Tweet\CreateTweetService;
-use Illuminate\Support\Facades\Auth;
 
 class TweetController extends Controller
 {
