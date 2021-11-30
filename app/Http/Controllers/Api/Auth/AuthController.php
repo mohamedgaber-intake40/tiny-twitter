@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Resources\TokenResource;
-use App\Http\Resources\UserResource;
 use App\Services\Auth\LoginService;
 use App\Services\Auth\LogoutService;
 use App\Services\Auth\RegisterService;
@@ -26,11 +25,15 @@ class AuthController extends Controller
      */
     public function register(RegisterRequest $request, RegisterService $registerService)
     {
+        //todo move messages to lang files
         ['user' => $user, 'token' => $token] = $registerService->handle($request->validated() + [ 'token_name' => \request()->userAgent() ]);
 
         return response([
             'data'    => [
-                'user'  => UserResource::make($user),
+                'user'  => [
+                    'id' => $user->id,
+                    'image' => $user->image_url
+                ],
                 'token' => TokenResource::make($token),
             ],
             'message' => 'Registered successfully.'
@@ -46,6 +49,7 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request, LoginService $loginService)
     {
+        //todo move messages to lang files
         $token = $loginService->handle($request->validated() + [ 'token_name' => \request()->userAgent() ]);
         return TokenResource::make($token)->additional(['message' => 'Logged in successfully.']);
     }
@@ -56,6 +60,7 @@ class AuthController extends Controller
      */
     public function logout(LogoutService $logoutService)
     {
+        //todo move messages to lang files
         $logoutService->handle();
         return response(['message' => 'Logged out successfully.']);
     }

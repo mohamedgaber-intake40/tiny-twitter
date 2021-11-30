@@ -38,6 +38,7 @@ class LoginService extends Service
      */
     public function handle(array $data = null)
     {
+        //todo move messages to lang files
         if ($this->hasToManyAttempts())
             $this->sendLockoutResponse();
 
