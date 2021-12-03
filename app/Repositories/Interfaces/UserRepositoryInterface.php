@@ -22,4 +22,10 @@ interface UserRepositoryInterface
      * @return mixed
      */
     public function followUser($followerUser, $followedUser);
+
+    /**
+     * @return mixed
+     */
+    public function getAllWithCount($relations = []);
+
 }

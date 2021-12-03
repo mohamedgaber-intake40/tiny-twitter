@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\TweetController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -17,4 +18,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('tweets', TweetController::class)->only('store');
 
     Route::post('users/{user}/follow', [UserController::class, 'follow'])->name('users.follow');
+
+    Route::get('actions-report', ReportController::class)->name('users.actions.report');
 });

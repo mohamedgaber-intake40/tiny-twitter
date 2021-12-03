@@ -35,4 +35,9 @@ class UserRepository implements UserRepositoryInterface
         $followerUser->follows()->attach($followedUser);
     }
 
+
+    public function getAllWithCount($relations = [])
+    {
+        return User::withCount($relations)->get();
+    }
 }
