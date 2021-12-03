@@ -7,14 +7,16 @@ use App\Http\Resources\SuccessResource;
 use App\Models\User;
 use App\Services\User\FollowUserService;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
     /**
      * @param User $user
      * @param FollowUserService $followUserService
-     * @return SuccessResource
+     * @return JsonResponse|object
      * @throws AuthorizationException
      */
     public function follow(User $user, FollowUserService $followUserService)
@@ -25,6 +27,8 @@ class UserController extends Controller
             'followed_user' => $user,
         ]);
         return SuccessResource::make([])
-                              ->additional(['message' => __('success.users.followed')]);
+                              ->additional(['message' => __('success.users.followed')])
+                              ->response()
+                              ->setStatusCode(Response::HTTP_CREATED);
     }
 }

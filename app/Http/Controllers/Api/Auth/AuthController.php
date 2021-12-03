@@ -10,8 +10,10 @@ use App\Http\Resources\TokenResource;
 use App\Services\Auth\LoginService;
 use App\Services\Auth\LogoutService;
 use App\Services\Auth\RegisterService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
@@ -19,7 +21,7 @@ class AuthController extends Controller
     /**
      * @param RegisterRequest $request
      * @param RegisterService $registerService
-     * @return SuccessResource
+     * @return JsonResponse|object
      */
     public function register(RegisterRequest $request, RegisterService $registerService)
     {
@@ -31,7 +33,9 @@ class AuthController extends Controller
                 'image' => $user->image_url
             ],
             'token' => TokenResource::make($token),
-        ])->additional(['message' => __('success.auth.register')]);
+        ])->additional(['message' => __('success.auth.register')])
+          ->response()
+          ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
