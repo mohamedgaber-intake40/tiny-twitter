@@ -10,6 +10,6 @@ class ReportController extends Controller
     public function __invoke(UserActionsReportService $userActionsReportService)
     {
         $pdf = $userActionsReportService->handle();
-        return $pdf->download('user-actions-report');
+        return $pdf->download('user-actions-report.pdf');
     }
 }
