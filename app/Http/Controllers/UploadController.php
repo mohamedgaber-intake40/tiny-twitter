@@ -19,13 +19,4 @@ class UploadController extends Controller
         return response($file)->header('Content-Type', $mime);
     }
 
-    public function download($path)
-    {
-        try {
-            return Storage::download($path);
-        } catch (\League\Flysystem\FileNotFoundException $exception){
-           return abort(404);
-        }
-    }
-
 }

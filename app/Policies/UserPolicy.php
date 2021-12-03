@@ -12,16 +12,11 @@ class UserPolicy
     use HandlesAuthorization;
 
     /**
-     * Create a new policy instance.
-     *
-     * @return void
+     * @param User $followerUser
+     * @param User $followedUser
+     * @return bool|\Illuminate\Auth\Access\Response
      */
-    public function __construct()
-    {
-        //
-    }
-
-    public function follow(User $followerUser,User $followedUser)
+    public function follow(User $followerUser, User $followedUser)
     {
         //todo move messages to lang files
 

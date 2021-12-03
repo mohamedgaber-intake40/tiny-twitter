@@ -28,6 +28,7 @@ class FollowUserService extends Service
      */
     public function handle(array $data = null)
     {
+        //todo move to users policy
         if ($data['follower_user']->id == $data['followed_user']->id)
             throw ValidationException::withMessages([
                 'follow_user' => "You can't follow yourself."
