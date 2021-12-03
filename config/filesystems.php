@@ -1,5 +1,4 @@
 <?php
-
 return [
 
     /*
@@ -33,6 +32,7 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+            'url' => env('APP_URL').'/uploads',
         ],
 
         'public' => [
@@ -66,8 +66,10 @@ return [
     |
     */
 
+
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('storage/private') => storage_path('app'),
     ],
 
 ];

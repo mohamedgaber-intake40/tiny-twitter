@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
+    protected static $stringMaxLength = 100;
     /**
      * Run the migrations.
      *
@@ -13,13 +14,14 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        //todo add columns length
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('name',self::$stringMaxLength);
+            $table->string('email',self::$stringMaxLength)->unique();
+            $table->string('password',self::$stringMaxLength);
+            $table->string('image');
+            $table->date('date_of_birth');
             $table->timestamps();
         });
     }
