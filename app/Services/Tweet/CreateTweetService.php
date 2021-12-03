@@ -21,6 +21,10 @@ class CreateTweetService extends Service
         $this->tweetRepository = $tweetRepository;
     }
 
+    /**
+     * @param array|null $data ['content','user_id]
+     * @return mixed
+     */
     public function handle(array $data = null)
     {
         $tweetData = Arr::only($data,[

@@ -36,6 +36,10 @@ class UserRepository implements UserRepositoryInterface
     }
 
 
+    /**
+     * @param array $relations
+     * @return mixed
+     */
     public function getAllWithCount($relations = [])
     {
         return User::withCount($relations)->get();
