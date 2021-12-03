@@ -59,11 +59,10 @@ trait ThrottleLogins
     protected function getLockoutMessage()
     {
         $rateLimiterAvailableIn = $this->limiterAvailableIn();
-        return sprintf(
-            'To many attempts, you can try in %s minutes and %s seconds.',
-            floor($rateLimiterAvailableIn / 60),
-            $rateLimiterAvailableIn % 60
-        );
+        return trans('auth.throttle',[
+            'minutes' => floor($rateLimiterAvailableIn / 60),
+            'seconds' => $rateLimiterAvailableIn % 60
+        ]);
     }
 
 }

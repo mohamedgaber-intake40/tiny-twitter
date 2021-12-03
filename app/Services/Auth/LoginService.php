@@ -38,7 +38,6 @@ class LoginService extends Service
      */
     public function handle(array $data = null)
     {
-        //todo move messages to lang files
         if ($this->hasToManyAttempts())
             $this->sendLockoutResponse();
 
@@ -46,7 +45,7 @@ class LoginService extends Service
 
         if (!$user || !Hash::check($data['password'], $user->password)) {
             $this->incrementLoginAttempts();
-            throw ValidationException::withMessages(['message' => 'The provided credentials do not match our records.']);
+            throw ValidationException::withMessages(['message' => __('auth.failed')]);
         }
         $this->clearLoginAttempts();
         $this->tokenRepository->deleteTokenByName($user, $data['token_name']);

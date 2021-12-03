@@ -18,10 +18,12 @@ class UserPolicy
      */
     public function follow(User $followerUser, User $followedUser)
     {
-        //todo move messages to lang files
 
         if ($followerUser->follows()->where('users.id', $followedUser->id)->exists())
-            return $this->deny('already followed before.');
+            return $this->deny(__('authorization.users.followed_before'));
+
+        if($followedUser->id == $followerUser->id)
+            return $this->deny(__('authorization.users.follow_yourself'));
 
         return true;
     }

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateTweetsTable extends Migration
 {
+    protected static $stringMaxLength = 145;
     /**
      * Run the migrations.
      *
@@ -15,7 +16,7 @@ class CreateTweetsTable extends Migration
     {
         Schema::create('tweets', function (Blueprint $table) {
             $table->id();
-            $table->string('content',145);
+            $table->string('content',self::$stringMaxLength);
             $table->foreignIdFor(\App\Models\User::class)->constrained();
             $table->timestamps();
         });

@@ -20,7 +20,6 @@ class UserController extends Controller
      * @param FollowUserService $followUserService
      * @return Application|ResponseFactory|Response
      * @throws AuthorizationException
-     * @throws ValidationException
      */
     public function follow(User $user, FollowUserService $followUserService)
     {
@@ -29,6 +28,6 @@ class UserController extends Controller
             'follower_user' => \auth()->user(),
             'followed_user' => $user,
         ]);
-        return response(['message' => 'User Followed Successfully.']);
+        return response(['message' => __('success.users.followed')]);
     }
 }

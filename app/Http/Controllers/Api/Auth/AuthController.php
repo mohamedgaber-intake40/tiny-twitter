@@ -25,7 +25,6 @@ class AuthController extends Controller
      */
     public function register(RegisterRequest $request, RegisterService $registerService)
     {
-        //todo move messages to lang files
         ['user' => $user, 'token' => $token] = $registerService->handle($request->validated() + [ 'token_name' => \request()->userAgent() ]);
 
         return response([
@@ -36,7 +35,7 @@ class AuthController extends Controller
                 ],
                 'token' => TokenResource::make($token),
             ],
-            'message' => 'Registered successfully.'
+            'message' => __('success.auth.register')
         ]);
 
     }
@@ -49,9 +48,8 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request, LoginService $loginService)
     {
-        //todo move messages to lang files
         $token = $loginService->handle($request->validated() + [ 'token_name' => \request()->userAgent() ]);
-        return TokenResource::make($token)->additional(['message' => 'Logged in successfully.']);
+        return TokenResource::make($token)->additional(['message' =>  __('success.auth.login')]);
     }
 
     /**
@@ -60,9 +58,8 @@ class AuthController extends Controller
      */
     public function logout(LogoutService $logoutService)
     {
-        //todo move messages to lang files
         $logoutService->handle();
-        return response(['message' => 'Logged out successfully.']);
+        return response(['message' =>  __('success.auth.logout')]);
     }
 
 }

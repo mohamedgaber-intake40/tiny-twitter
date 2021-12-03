@@ -18,13 +18,12 @@ class TweetController extends Controller
      */
     public function store(TweetRequest $request, CreateTweetService $tweetService)
     {
-        //todo move messages to lang files
         $tweet = $tweetService->handle($request->validated() + ['user_id' => \auth()->id()]);
         return response([
             'data'    => [
                 'id' => $tweet->id
             ],
-            'message' => 'Tweet created successfully.'
+            'message' => __('success.tweets.created')
         ]);
     }
 }
