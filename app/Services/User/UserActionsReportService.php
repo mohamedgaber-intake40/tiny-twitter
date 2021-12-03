@@ -25,7 +25,7 @@ class UserActionsReportService extends Service
     private function getPdfData()
     {
         $users            = $this->userRepository->getAllWithCount('tweets');
-        $tweetsPerUserAvg = round($users->sum('tweets_count') / $users->count(),2 );
+        $tweetsPerUserAvg = $users->count() > 0 ? round($users->sum('tweets_count') / $users->count(),2 ) : 0;
         return compact('users', 'tweetsPerUserAvg');
     }
 }
