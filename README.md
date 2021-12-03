@@ -26,6 +26,10 @@ $ php artisan key:generate
 ```
 $ php artisan artisan:migrate
 ```
+- to add fake data you can run 
+```
+$ php artisan db:seed
+```
 
 ```
 $ php artisan serve
